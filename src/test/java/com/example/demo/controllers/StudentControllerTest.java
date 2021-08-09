@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -56,14 +58,14 @@ public class StudentControllerTest {
 
     }
 
-   /* @Test
+   @Test
     public void getStudentByIdTest() throws Exception {
         Student student = new Student();
         student.setId(2L);
         student.setFullName("Spring Integration Testing");
         student.setAge(20);
         student.setEmail("integration@gmail.com");
-        Mockito.when(studentRepository.getById(Mockito.anyLong())).thenReturn(student);
+        Mockito.when(studentRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(student));
 
         String URI="/api/v1/student/2";
 
@@ -74,7 +76,7 @@ public class StudentControllerTest {
         String resultJson= result.getResponse().getContentAsString();
         assertThat(resultJson).isEqualTo(expectJson);
 
-    }*/
+    }
 
     private String mapToJson(Student student) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -48,6 +48,27 @@ public class StudentControllerIntegrationTest {
 
     }
 
+    @Test
+    public void getStudentByIdTest() throws Exception {
+        Student student = new Student();
+        student.setId(2L);
+        student.setFullName("Spring Integration Testing");
+        student.setAge(8);
+        student.setEmail("integration@gmail.com");
+
+        String inputJson=this.mapToJson(student);
+
+        String URIToCreateStudent="/api/v1/student";
+        HttpEntity<Student> entity=new HttpEntity<>(student, headers);
+        testRestTemplate.exchange(fromFullURLWithPort(URIToCreateStudent),
+                HttpMethod.POST, entity, String.class);
+        String URI="/api/v1/student/2";
+        String bodyJsonResponse = testRestTemplate.getForObject(fromFullURLWithPort(URI), String.class);
+        assertThat(bodyJsonResponse).isEqualTo(inputJson);
+
+
+    }
+
     private String fromFullURLWithPort(String uri) {
         return "http://localhost:"+port+uri;
     }
