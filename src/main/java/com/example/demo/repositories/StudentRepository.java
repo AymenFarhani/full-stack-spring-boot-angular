@@ -13,7 +13,7 @@ import com.example.demo.entities.Student;
 public interface StudentRepository extends JpaRepository<Student, Long>{
 
 	@Query("SELECT s FROM Student s WHERE s.fullName like %:fullName%")
-	Page<Student> getStudentsByFullName(@Param(value = "fullName")String fullName, Pageable paging);
+	Page<Student> getStudentByFullName(@Param(value = "fullName")String fullName, Pageable paging);
 	
 	@Query("SELECT s FROM Student s WHERE s.fullName like %:email%")
 	Page<Student> getStudentsByEmail(@Param(value = "email")String email, Pageable paging);

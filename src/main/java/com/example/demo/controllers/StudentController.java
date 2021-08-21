@@ -55,7 +55,7 @@ public class StudentController{
 		Pageable paging = PageRequest.of(page, size);
 		Page<Student> stds;
 		if (fullName != null && email == null) {
-			stds = studentRepository.getStudentsByFullName(fullName, paging);
+			stds = studentRepository.getStudentByFullName(fullName, paging);
 		} else if (email != null && fullName == null) {
 			stds = studentRepository.getStudentsByEmail(email, paging);
 		} else if (fullName != null && email != null) {
